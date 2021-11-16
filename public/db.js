@@ -1,6 +1,6 @@
 let db;
 
-const request = indexedDB.open("budget, 1");
+const request = indexedDB.open("budget", 1);
 
 request.onupgradeneeded = function (event) {
   const db = event.target.result;
@@ -27,7 +27,7 @@ function saveRecord(record) {
 function checkDatabase() {
   const transaction = db.transaction(["budget"], "readwrite");
   const store = transaction.objectStore("budget");
-  const getAll = store.getAll;
+  const getAll = store.getAll();
 
   getAll.onsuccess = function () {
     if (getAll.result.length > 0) {
@@ -44,10 +44,10 @@ function checkDatabase() {
           const transaction = db.transaction(['budget'] , 'readwrite');
           const store = transaction.objectStore('budget')
 
-          store.clear
+          store.clear();
       })
     }
   };
 }
 
-window.addEventListener('online', checkDatabase());
+window.addEventListener('online', checkDatabase);
